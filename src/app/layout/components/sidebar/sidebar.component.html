@@ -23,17 +23,35 @@
         </a>
         <div class="nested-menu">
             <a mat-list-item (click)="addExpandClass('pages')">
-                <mat-icon class="sidenav-icon">add</mat-icon> {{ 'Menu' | translate }}
+                <mat-icon class="sidenav-icon">add</mat-icon> {{ 'Parâmetros' | translate }}
             </a>
             <ul class="nested submenu" [class.expand]="showMenu === 'pages'">
                 <li>
-                    <a href="javascript:void(0)"><span>{{ 'Submenu' | translate }}</span></a>
+                    <a href="javascript:void(0)"><span>{{ 'Treinamento' | translate }}</span></a>
                 </li>
                 <li>
-                    <a href="javascript:void(0)"><span>{{ 'Submenu' | translate }}</span></a>
+                    <a href="javascript:void(0)"><span>{{ 'Alimentação' | translate }}</span></a>
                 </li>
                 <li>
-                    <a href="javascript:void(0)"><span>{{ 'Submenu' | translate }}</span></a>
+                    <a href="javascript:void(0)"><span>{{ 'Entrevista' | translate }}</span></a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)"><span>{{ 'Mensagens' | translate }}</span></a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)"><span>{{ 'Grupos' | translate }}</span></a>
+                </li>
+            </ul>
+        </div>
+        <div class="nested-menu">
+            <a mat-list-item (click)="addExpandClass('cadastros')">
+                <mat-icon class="sidenav-icon">add</mat-icon> {{ 'Cadastros' | translate }}
+            </a>
+            <ul class="nested submenu" [class.expand]="showMenu === 'cadastros'">
+                <li>
+                    <a mat-list-item [routerLinkActive]="'active'" [routerLink]="['/client']">
+                        <mat-icon class="sidenav-icon">dashboard</mat-icon> {{ 'Cliente' | translate }}
+                    </a>
                 </li>
             </ul>
         </div>
