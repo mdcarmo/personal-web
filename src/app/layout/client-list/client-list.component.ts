@@ -1,5 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { Router } from '@angular/router';
+
+// https://github.com/marinantonio/angular-mat-table-crud/blob/master/src/app/app.component.ts
 
 @Component({
   selector: 'app-client-list',
@@ -7,13 +10,13 @@ import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
   styleUrls: ['./client-list.component.scss']
 })
 export class ClientListComponent implements OnInit {
-  displayedColumns = ['id', 'name', 'address', 'phone', 'edit'];
+  displayedColumns = ['id', 'name', 'address', 'phone', 'actions'];
   dataSource: MatTableDataSource<Client>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor() {
+  constructor(private router: Router) {
      const users: Client[] = [];
      for (let i = 1; i <= 100; i++) {
          users.push(createNewClient(i));
@@ -27,6 +30,28 @@ export class ClientListComponent implements OnInit {
     this.dataSource.sort = this.sort;
   }
 
+  addNew() {
+    console.log('Add new client');
+    this.router.navigate(['/client-new']);
+  }
+
+  startEdit() {
+    console.log('Edit client');
+  }
+
+  deleteItem() {
+    console.log('Delete client');
+  }
+
+  refresh() {
+    console.log('reload');
+  }
+
+  onUpdate() {
+    localStorage.setItem('isLoggedin', 'true');
+    this.router.navigate(['/dashboard']);
+  }
+
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
@@ -35,7 +60,6 @@ export class ClientListComponent implements OnInit {
         this.dataSource.paginator.firstPage();
     }
 }
-
 }
 
 export interface Client {

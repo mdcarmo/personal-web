@@ -8,7 +8,7 @@ import {
     MatMenuModule,
     MatSidenavModule,
     MatToolbarModule
-} from '@angular/material';
+    } from '@angular/material';
 import { TranslateModule } from '@ngx-translate/core';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { TopnavComponent } from './components/topnav/topnav.component';

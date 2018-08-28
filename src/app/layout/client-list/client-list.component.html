@@ -1,54 +1,60 @@
-
-
 <mat-card class="mb-20">
   <mat-card-header>
       <mat-card-title>Clientes</mat-card-title>
   </mat-card-header>
   <mat-card-content>
-      <button mat-raised-button color="primary">Novo</button>
+     Reload data:
+    <button mat-icon-button (click)="refresh()">
+      <mat-icon>refresh</mat-icon>
+    </button>
   </mat-card-content>
 </mat-card>
-
-
-
-
 <mat-form-field>
   <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter" >
 </mat-form-field>
-
-<div class="mat-elevation-z8">
-
-  
-  <table mat-table [dataSource]="dataSource" matSort >
-
-      <ng-container matColumnDef="id" item-width="50px;">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
-          <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+<div class="container mat-elevation-z8">
+  <mat-table [dataSource]="dataSource" matSort class="mat-cell" >
+      <ng-container matColumnDef="id">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> ID </mat-header-cell>
+          <mat-cell *matCellDef="let row"> {{row.id}} </mat-cell>
       </ng-container>
-
       <ng-container matColumnDef="name">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
-          <td mat-cell *matCellDef="let row"> {{row.name}} </td>
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
+          <mat-cell *matCellDef="let row"> {{row.name}} </mat-cell>
       </ng-container>
- 
       <ng-container matColumnDef="address">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Address </th>
-        <td mat-cell *matCellDef="let row"> {{row.address}} </td>
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Address </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.address}} </mat-cell>
       </ng-container>
-
       <ng-container matColumnDef="phone">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Phone </th>
-        <td mat-cell *matCellDef="let row"> {{row.phone}} </td>
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Phone </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.phone}} </mat-cell>
       </ng-container>
-
-      <ng-container matColumnDef="edit">
-        <th mat-header-cell *matHeaderCellDef> Edit </th>
-        <td mat-cell *matCellDef="let row"> <button mat-raised-button color="primary">Edit</button> </td>
+      <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef>
+          <button mat-icon-button color="primary" (click)="addNew()">
+            <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
+          </button>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let row; let i=index;">
+          <button mat-icon-button color="accent" (click)="startEdit()">
+            <mat-icon aria-label="Edit">edit</mat-icon>
+          </button>
+          <button mat-icon-button color="accent" (click)="deleteItem()">
+            <mat-icon aria-label="Delete">delete</mat-icon>
+          </button>
+        </mat-cell>
       </ng-container>
-
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
-
-  <mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+  <div class="no-results" [style.display]="dataSource.length == 0 ? '' : 'none'">
+      No results
+  </div>
+  <mat-paginator #paginator
+    [length]="dataSource.filteredData.length"
+    [pageIndex]="0"
+    [pageSize]="10"
+    [pageSizeOptions]="[5, 10, 25, 100]">
+  </mat-paginator>
 </div>
